@@ -1,0 +1,19 @@
+// Shared form system. Components reuse these classes.
+.field { display: flex; flex-direction: column; gap: var(--space-2); margin-block-end: var(--space-5); }
+.field__label { font-weight: var(--fw-medium); font-size: var(--fs-sm); color: var(--color-text); }
+.field__required { color: var(--color-danger-text); margin-inline-start: var(--space-1); }
+.field__hint { font-size: var(--fs-xs); color: var(--color-text-muted); }
+.field__control { position: relative; display: flex; }
+.field__control > input { width: 100%; padding-inline-end: 2.75rem; }
+.field__error {
+  display: flex; gap: var(--space-2); align-items: flex-start;
+  font-size: var(--fs-sm); color: var(--color-danger-text);
+}
+.field--invalid input { border-color: var(--color-danger) !important; }
+.field__toggle {
+  position: absolute; inset-block: 0; inset-inline-end: 0;
+  min-width: 2.75rem; border: 0; background: transparent; color: var(--color-text-muted);
+  cursor: pointer; border-radius: var(--radius-md);
+}
+.field__toggle:hover { color: var(--color-primary); }
+.ltr-input { direction: ltr; text-align: start; }

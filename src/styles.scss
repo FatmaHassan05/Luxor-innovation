@@ -1,0 +1,7 @@
+@use './styles/tokens';
+@use './styles/base';
+@use './styles/forms';
+
+// Bootstrap usage rule (see README): only the grid + non-directional utilities are loaded.
+// Do NOT use Bootstrap's physical helpers (ms-*, me-*, text-start, float-start, ...).
+// Use logical properties (margin-inline-*, text-align:start) in component styles instead.

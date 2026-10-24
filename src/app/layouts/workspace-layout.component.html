@@ -1,0 +1,38 @@
+<a class="skip-link" href="#main" (click)="focusMain($event)">{{ 'nav.skipToContent' | translate }}</a>
+
+<div class="ws">
+  <aside class="ws__side" [class.is-open]="menuOpen()">
+    <a routerLink="/" class="ws__brand"><lx-brand-logo size="sm" /></a>
+    <p class="ws__role">{{ roleLabel() | translate }}</p>
+    <nav [attr.aria-label]="'nav.workspaceNavigation' | translate">
+      <ul class="ws__list">
+        @for (item of items(); track item.path) {
+          <li>
+            <a [routerLink]="item.path" routerLinkActive="is-active" (click)="menuOpen.set(false)">
+              <i class="pi" [class]="item.icon" aria-hidden="true"></i>
+              <span>{{ item.labelKey | translate }}</span>
+            </a>
+          </li>
+        }
+      </ul>
+    </nav>
+  </aside>
+
+  <div class="ws__main">
+    <header class="ws__top">
+      <button type="button" class="ws__toggle" [attr.aria-expanded]="menuOpen()" (click)="menuOpen.set(!menuOpen())">
+        <i class="pi" [class.pi-bars]="!menuOpen()" [class.pi-times]="menuOpen()" aria-hidden="true"></i>
+        <span class="visually-hidden">{{ 'nav.menu' | translate }}</span>
+      </button>
+      <span class="ws__spacer"></span>
+      <lx-language-switcher />
+      @if (auth.user(); as user) {
+        <span class="ws__user">{{ user.displayName }}</span>
+      }
+      <button pButton type="button" severity="secondary" [outlined]="true" (click)="signOut()">
+        <i class="pi pi-sign-out" aria-hidden="true"></i> {{ 'nav.signOut' | translate }}
+      </button>
+    </header>
+    <main id="main" tabindex="-1" class="page"><router-outlet /></main>
+  </div>
+</div>

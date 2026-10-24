@@ -1,0 +1,85 @@
+// Design tokens derived from the Luxor University logo (sampled primary ≈ #202890).
+:root {
+  // Brand
+  --color-primary: #202890;
+  --color-primary-hover: #1a2178;
+  --color-primary-deep: #151b60;
+  --color-primary-subtle: #edeef9;
+  --color-primary-border: #c9cdee;
+
+  // Neutrals
+  --color-background: #f7f8fa;
+  --color-surface: #ffffff;
+  --color-surface-muted: #f1f3f7;
+  --color-text: #202633;
+  --color-text-muted: #667085;
+  --color-border: #e4e7ec;
+  --color-border-strong: #cfd4dc;
+
+  // Semantic (text variants meet 4.5:1 on their tint)
+  --color-success: #16845b;
+  --color-success-text: #0f6847;
+  --color-success-tint: #e7f5ee;
+  --color-warning: #b7791f;
+  --color-warning-text: #7f5208;
+  --color-warning-tint: #fbf1de;
+  --color-danger: #c0393b;
+  --color-danger-text: #a02a2c;
+  --color-danger-tint: #fbe9e9;
+  --color-info: #3574b8;
+  --color-info-text: #1f5a99;
+  --color-info-tint: #e8f0fa;
+
+  // Typography
+  --font-ar: 'Almarai', 'IBM Plex Sans', system-ui, sans-serif;
+  --font-en: 'IBM Plex Sans', 'Almarai', system-ui, sans-serif;
+  --font-family: var(--font-en);
+  --fs-xs: 0.8125rem;
+  --fs-sm: 0.875rem;
+  --fs-base: 1rem;
+  --fs-lg: 1.125rem;
+  --fs-xl: 1.25rem;
+  --fs-2xl: 1.5rem;
+  --fs-3xl: 1.875rem;
+  --fs-4xl: 2.375rem;
+  --lh-body: 1.6;
+  --lh-heading: 1.25;
+  --fw-regular: 400;
+  --fw-medium: 500;
+  --fw-strong: 600;
+
+  // Spacing (4px base)
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.5rem;
+  --space-6: 2rem;
+  --space-7: 3rem;
+  --space-8: 4.5rem;
+
+  // Shape: restrained radii; the arch (from the logo) is the one expressive shape.
+  --radius-sm: 4px;
+  --radius-md: 6px;
+  --radius-lg: 10px;
+  --radius-arch: 999px 999px 0 0;
+  --shadow-sm: 0 1px 2px rgb(16 24 40 / 6%);
+  --shadow-md: 0 4px 12px rgb(16 24 40 / 8%);
+
+  // Interaction
+  --focus-ring: 0 0 0 2px var(--color-surface), 0 0 0 4px var(--color-primary);
+  --ease: cubic-bezier(0.2, 0, 0, 1);
+  --t-fast: 150ms;
+  --t-base: 200ms;
+
+  // Layout
+  --header-h: 4.5rem;
+  --sidebar-w: 16.5rem;
+  --content-max: 72rem;
+}
+
+html[lang='ar'] {
+  --font-family: var(--font-ar);
+  --lh-body: 1.85;
+  --lh-heading: 1.45;
+}

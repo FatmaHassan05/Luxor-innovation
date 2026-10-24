@@ -1,0 +1,51 @@
+<header class="header">
+  <div class="header__inner">
+    <a routerLink="/" class="header__brand">
+      <lx-brand-logo size="md" />
+    </a>
+
+    <button
+      type="button"
+      class="header__toggle"
+      [attr.aria-expanded]="open()"
+      aria-controls="primary-nav"
+      (click)="open.set(!open())"
+    >
+      <i class="pi" [class.pi-bars]="!open()" [class.pi-times]="open()" aria-hidden="true"></i>
+      <span class="visually-hidden">{{ 'nav.menu' | translate }}</span>
+    </button>
+
+    <nav id="primary-nav" class="header__nav" [class.is-open]="open()" [attr.aria-label]="'nav.mainNavigation' | translate">
+      <ul class="header__list">
+        @for (item of items; track item.path) {
+          <li>
+            <a
+              [routerLink]="item.path"
+              routerLinkActive="is-active"
+              [routerLinkActiveOptions]="{ exact: !!item.exact }"
+              (click)="open.set(false)"
+              >{{ item.labelKey | translate }}</a
+            >
+          </li>
+        }
+      </ul>
+
+      <div class="header__actions">
+        <lx-language-switcher />
+        @if (auth.user(); as user) {
+          <a pButton [outlined]="true" [routerLink]="workspacePath()" (click)="open.set(false)">
+            <i class="pi pi-th-large" aria-hidden="true"></i> {{ 'nav.myWorkspace' | translate }}
+          </a>
+          <button pButton type="button" severity="secondary" [text]="true" (click)="signOut()">
+            <i class="pi pi-sign-out" aria-hidden="true"></i> {{ 'nav.signOut' | translate }}
+          </button>
+        } @else {
+          <button pButton type="button" (click)="menu.toggle($event)" aria-haspopup="true">
+            <i class="pi pi-user" aria-hidden="true"></i> {{ 'nav.signIn' | translate }}
+          </button>
+          <p-menu #menu [popup]="true" [model]="signInItems()" appendTo="body" />
+        }
+      </div>
+    </nav>
+  </div>
+</header>

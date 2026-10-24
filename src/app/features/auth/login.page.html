@@ -1,0 +1,104 @@
+<div class="auth">
+  <aside class="auth__panel" aria-hidden="true">
+    <div class="auth__arch arch"><lx-brand-logo size="lg" [showName]="false" /></div>
+    <p class="auth__panel-text">{{ 'auth.panelText' | translate }}</p>
+    <div class="wave-rule auth__wave"></div>
+  </aside>
+
+  <section class="auth__main">
+    <div class="auth__bar">
+      <a routerLink="/" class="auth__back"><i class="pi pi-arrow-left icon-flip" aria-hidden="true"></i> {{ 'auth.backHome' | translate }}</a>
+      <lx-language-switcher />
+    </div>
+
+    <main id="main" class="auth__card">
+      <div class="auth__mobile-brand"><lx-brand-logo size="sm" /></div>
+      <h1>{{ titleKey | translate }}</h1>
+      <p class="auth__sub">{{ subtitleKey | translate }}</p>
+
+      @if (expired()) {
+        <lx-alert severity="warning">{{ 'auth.sessionExpired' | translate }}</lx-alert>
+      }
+      @if (errorKey(); as key) {
+        <lx-alert severity="error">{{ key | translate }}</lx-alert>
+      }
+
+      <form [formGroup]="form" (ngSubmit)="submit()" novalidate>
+        <div class="field" [class.field--invalid]="showError('email')">
+          <label class="field__label" for="email">
+            {{ 'auth.email' | translate }}
+            <span class="field__required" aria-hidden="true">*</span>
+            <span class="visually-hidden">({{ 'common.required' | translate }})</span>
+          </label>
+          <input
+            pInputText
+            id="email"
+            type="email"
+            formControlName="email"
+            class="ltr-input"
+            dir="ltr"
+            autocomplete="username"
+            inputmode="email"
+            aria-required="true"
+            [attr.aria-invalid]="showError('email') ? 'true' : null"
+            [attr.aria-describedby]="showError('email') ? 'email-error' : null"
+          />
+          @if (showError('email'); as key) {
+            <p id="email-error" class="field__error"><i class="pi pi-exclamation-circle" aria-hidden="true"></i>{{ key | translate }}</p>
+          }
+        </div>
+
+        <div class="field" [class.field--invalid]="showError('password')">
+          <label class="field__label" for="password">
+            {{ 'auth.password' | translate }}
+            <span class="field__required" aria-hidden="true">*</span>
+            <span class="visually-hidden">({{ 'common.required' | translate }})</span>
+          </label>
+          <div class="field__control">
+            <input
+              pInputText
+              id="password"
+              [type]="showPassword() ? 'text' : 'password'"
+              formControlName="password"
+              class="ltr-input"
+              dir="ltr"
+              autocomplete="current-password"
+              aria-required="true"
+              [attr.aria-invalid]="showError('password') ? 'true' : null"
+              [attr.aria-describedby]="showError('password') ? 'password-error' : null"
+            />
+            <button
+              type="button"
+              class="field__toggle"
+              (click)="showPassword.set(!showPassword())"
+              [attr.aria-pressed]="showPassword()"
+              [attr.aria-label]="(showPassword() ? 'auth.hidePassword' : 'auth.showPassword') | translate"
+            >
+              <i class="pi" [class.pi-eye]="!showPassword()" [class.pi-eye-slash]="showPassword()" aria-hidden="true"></i>
+            </button>
+          </div>
+          @if (showError('password'); as key) {
+            <p id="password-error" class="field__error"><i class="pi pi-exclamation-circle" aria-hidden="true"></i>{{ key | translate }}</p>
+          }
+        </div>
+
+        <button pButton type="submit" class="auth__submit" [disabled]="loading()">
+          @if (loading()) {
+            <i class="pi pi-spin pi-spinner" aria-hidden="true"></i> {{ 'auth.submitting' | translate }}
+          } @else {
+            {{ 'auth.submit' | translate }}
+          }
+        </button>
+      </form>
+
+      @if (demo) {
+        <div class="auth__demo">
+          <lx-alert severity="warning">{{ 'auth.demoNotice' | translate }}</lx-alert>
+          <p class="auth__demo-title">{{ 'auth.demoAccount' | translate }}</p>
+          <p class="auth__demo-creds" dir="ltr"><code>{{ demo.email }}</code> / <code>{{ demo.password }}</code></p>
+          <button pButton type="button" severity="secondary" [outlined]="true" size="small" (click)="fillDemo()">{{ 'auth.demoFill' | translate }}</button>
+        </div>
+      }
+    </main>
+  </section>
+</div>
